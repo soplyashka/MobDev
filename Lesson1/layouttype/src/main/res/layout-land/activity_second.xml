@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/sec">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/editTextText"
+            android:layout_width="363dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:rotationX="6"
+            android:text="New life for mirea activity!" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <Button
+            android:id="@+id/button14"
+            android:layout_width="372dp"
+            android:layout_height="77dp"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button15"
+            android:layout_width="361dp"
+            android:layout_height="match_parent"
+            android:text="Button" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="58dp">
+
+        <Button
+            android:id="@+id/button12"
+            android:layout_width="373dp"
+            android:layout_height="76dp"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button17"
+            android:layout_width="299dp"
+            android:layout_height="match_parent"
+            android:text="Button" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="74dp">
+
+        <Button
+            android:id="@+id/button16"
+            android:layout_width="285dp"
+            android:layout_height="match_parent"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button13"
+            android:layout_width="302dp"
+            android:layout_height="74dp"
+            android:text="Button" />
+    </TableRow>
+
+    <Button
+        android:id="@+id/button18"
+        android:layout_width="272dp"
+        android:layout_height="58dp"
+        android:text="Button" />
+</TableLayout>
