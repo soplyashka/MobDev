@@ -47,3 +47,13 @@
 ![](scr/11.jpg)
 
 ![](scr/12.jpg)
+
+Создать новый модуль. В меню «File | New | New Module | Phone & Tablet Module | Empty Views Activity». Название проекта «NotificationApp». 
+
+
+![](scr/13.jpg)
+
+![](scr/14.jpg)
+
+![](scr/15.jpg)
+
