@@ -3,11 +3,26 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/button_show_dialog"
+        android:id="@+id/button_show_time_dialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:onClick="onClickShowDialog"
-        android:text="Show dialog" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="Показать TimePicker" />
+
+    <Button
+        android:id="@+id/button_show_date_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button_show_time_dialog"
+        android:layout_centerHorizontal="true"
+        android:text="Показать DatePicker" />
+
+    <Button
+        android:id="@+id/button_show_progress_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button_show_date_dialog"
+        android:layout_centerHorizontal="true"
+        android:text="Показать ProgressDialog" />
 </RelativeLayout>
-   
