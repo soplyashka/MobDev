@@ -15,3 +15,8 @@
 
 
 Задание 3.4 Создать новый модуль. В меню «File | New | New Module | Phone & Tablet Module | Empty Views Activity». Название проекта «MultiActivity». 
+В разметке activity_main.xml требуется добавить кнопку и реализовать обработчик нажатия на кнопку: 
+
+![](scr/3.jpg)
+
+![](scr/4.jpg)
