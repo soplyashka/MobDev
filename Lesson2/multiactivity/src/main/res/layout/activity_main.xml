@@ -5,33 +5,25 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    tools:context=".MainActivity" >
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
-    <LinearLayout
+    <Button
+        android:id="@+id/button"
+        android:layout_width="232dp"
+        android:layout_height="141dp"
+        android:onClick="onClickNewActivity"
+
+        android:text="Отправить!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/edit"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:hint="Введите текст" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="62dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Введите текст" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="232dp"
-            android:layout_height="141dp"
-            android:onClick="onClickNewActivity"
-
-            android:text="Отправить!" />
-
-    </LinearLayout>
 
 </LinearLayout>
