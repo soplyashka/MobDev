@@ -1,3 +1,7 @@
+
+
+0. https://github.com/soplyashka/MobDev/blob/main/Lesson3/README.md#%D0%B2%D1%82%D0%BE%D1%80%D0%BE%D0%B9-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82-mireaproject
+1. https://github.com/soplyashka/MobDev/blob/main/Lesson3/README.md#%D0%B2%D1%82%D0%BE%D1%80%D0%BE%D0%B9-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82-mireaproject
 ## Первый проект "Lesson3"
 ### 1. Создайте модуль «IntentApp». 
 Создайте 2 activity. Проверьте наличие записи о новом активности в manifest - файле. В первой активности требуется получить системное время Далее требуется передать время из одной активности в другую и отобразить во второй activity в «textView» следующую строку: «КВАДРАТ ЗНАЧЕНИЯ МОЕГО НОМЕРА ПО СПИСКУ В ГРУППЕ (11) СОСТАВЛЯЕТ ЧИСЛО, а текущее время ВРЕМЯ».
