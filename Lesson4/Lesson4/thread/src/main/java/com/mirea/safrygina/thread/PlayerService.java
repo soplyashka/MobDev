@@ -5,7 +5,6 @@ import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.IBinder;
-package com.mirea.safrygina.thread;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -28,7 +27,7 @@ public class PlayerService extends Service implements MediaPlayer.OnCompletionLi
     public void onCreate() {
         super.onCreate();
 
-        mediaPlayer = MediaPlayer.create(this, R.raw.allo); // Файл должен быть в res/raw/
+        mediaPlayer = MediaPlayer.create(this, R.raw.allo);
         mediaPlayer.setOnCompletionListener(this);
     }
 
