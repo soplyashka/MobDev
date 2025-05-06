@@ -18,7 +18,7 @@ public class MyBackgroundWorker extends Worker {
     public Result doWork() {
         Log.d("MyBackgroundWorker", "Выполняется фоновая задача...");
         try {
-            Thread.sleep(5000); // имитация долгой работы
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             return Result.failure();
         }
