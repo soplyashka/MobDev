@@ -28,6 +28,22 @@
             android:id="@+id/nav_worker"
             android:icon="@drawable/ic_fone"
             android:title="Фоновая задача" />
+        <item
+            android:id="@+id/nav_camera"
+            android:icon="@drawable/ic_camera"
+            android:title="Камера" />
+
+        <item
+            android:id="@+id/nav_microphone"
+            android:icon="@drawable/ic_mic"
+            android:title="Измерение громкости" />
+
+        <item
+            android:id="@+id/nav_altitude"
+            android:icon="@drawable/ic_mountain"
+            android:title="Высота и организм" />
+
+
 
 
 

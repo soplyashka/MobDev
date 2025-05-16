@@ -37,5 +37,24 @@
         android:name="com.mirea.safrygina.mireaproject.WorkerFragment"
         android:label="Фоновая задача"
         tools:layout="@layout/fragment_worker" />
+    <fragment
+        android:id="@+id/nav_camera"
+        android:name="com.mirea.safrygina.mireaproject.CameraFragment"
+        android:label="Камера"
+        tools:layout="@layout/fragment_camera" />
+
+    <fragment
+        android:id="@+id/nav_microphone"
+        android:name="com.mirea.safrygina.mireaproject.MicrophoneFragment"
+        android:label="Измерение шума"
+        tools:layout="@layout/fragment_microphone" />
+
+    <fragment
+        android:id="@+id/nav_altitude"
+        android:name="com.mirea.safrygina.mireaproject.AltitudeFragment"
+        android:label="Высота и самочувствие"
+        tools:layout="@layout/fragment_altitude" />
+
+
 
 </navigation>
