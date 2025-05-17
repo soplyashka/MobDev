@@ -54,7 +54,13 @@
         android:name="com.mirea.safrygina.mireaproject.AltitudeFragment"
         android:label="Высота и самочувствие"
         tools:layout="@layout/fragment_altitude" />
-
-
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.mirea.safrygina.mireaproject.ProfileFragment"
+        android:label="Профиль" />
+    <fragment
+        android:id="@+id/nav_file"
+        android:name="com.mirea.safrygina.mireaproject.FilesFragment"
+        android:label="Работа с файлами" />
 
 </navigation>

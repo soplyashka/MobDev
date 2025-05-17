@@ -42,6 +42,14 @@
             android:id="@+id/nav_altitude"
             android:icon="@drawable/ic_mountain"
             android:title="Высота и организм" />
+        <item
+            android:id="@+id/nav_profile"
+            android:title="Профиль"
+            android:icon="@drawable/ic_manage" />
+        <item
+            android:id="@+id/nav_file"
+            android:title="Работа с файлами"
+            android:icon="@drawable/ic_file" />
 
 
 
