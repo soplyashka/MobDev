@@ -1,24 +1,40 @@
 package com.mirea.safrygina.lesson6;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
+import android.widget.Button;
+import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
+
+    private EditText editTextGroup, editTextNumber, editTextMovie;
+    private SharedPreferences sharedPreferences;
+    private static final String PREF_NAME = "user_prefs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        editTextGroup = findViewById(R.id.editTextGroup);
+        editTextNumber = findViewById(R.id.editTextNumber);
+        editTextMovie = findViewById(R.id.editTextMovie);
+        Button buttonSave = findViewById(R.id.buttonSave);
+
+        sharedPreferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+
+        // Загрузка сохранённых значений
+        editTextGroup.setText(sharedPreferences.getString("group", ""));
+        editTextNumber.setText(sharedPreferences.getString("number", ""));
+        editTextMovie.setText(sharedPreferences.getString("movie", ""));
+
+        buttonSave.setOnClickListener(v -> {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("group", editTextGroup.getText().toString());
+            editor.putString("number", editTextNumber.getText().toString());
+            editor.putString("movie", editTextMovie.getText().toString());
+            editor.apply();
         });
     }
 }
