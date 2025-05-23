@@ -1,8 +1,13 @@
 package com.mirea.safrygina.httpurlconnection;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +19,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
+
     private TextView tvIp, tvCity, tvRegion, tvLatitude, tvLongitude, tvWeather;
 
     @Override
@@ -27,82 +33,83 @@ public class MainActivity extends AppCompatActivity {
         tvLatitude = findViewById(R.id.tvLatitude);
         tvLongitude = findViewById(R.id.tvLongitude);
         tvWeather = findViewById(R.id.tvWeather);
-
-        new Thread(this::getExternalIpInfo).start();
     }
 
-    private void getExternalIpInfo() {
-        try {
+    public void onClick(View view) {
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkinfo = null;
+        if (connectivityManager != null) {
+            networkinfo = connectivityManager.getActiveNetworkInfo();
+        }
 
-            URL url = new URL("https://ipinfo.io/json");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(connection.getInputStream()));
-            StringBuilder response = new StringBuilder();
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                response.append(line);
-            }
-            reader.close();
-            connection.disconnect();
-
-            JSONObject json = new JSONObject(response.toString());
-            String ip = json.getString("ip");
-            String city = json.getString("city");
-            String region = json.getString("region");
-            String loc = json.getString("loc"); // координаты "lat,lon"
-
-            String[] parts = loc.split(",");
-            double latitude = Double.parseDouble(parts[0]);
-            double longitude = Double.parseDouble(parts[1]);
-
-            runOnUiThread(() -> {
-                tvIp.setText("IP: " + ip);
-                tvCity.setText("Город: " + city);
-                tvRegion.setText("Регион: " + region);
-                tvLatitude.setText("Широта: " + latitude);
-                tvLongitude.setText("Долгота: " + longitude);
-            });
-
-            // Шаг 2: Получение погоды
-            getWeatherInfo(latitude, longitude);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (networkinfo != null && networkinfo.isConnected()) {
+            new DownloadPageTask().execute("https://ipinfo.io/json");
+        } else {
+            Toast.makeText(this, "Нет интернета", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void getWeatherInfo(double lat, double lon) {
-        try {
-            String weatherUrl = "https://api.open-meteo.com/v1/forecast?latitude=" +
-                    lat + "&longitude=" + lon + "&current_weather=true";
+    private class DownloadPageTask extends AsyncTask<String, Void, String[]> {
+        @Override
+        protected String[] doInBackground(String... urls) {
+            try {
+                URL url = new URL(urls[0]);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(connection.getInputStream()));
+                StringBuilder response = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null)
+                    response.append(line);
+                reader.close();
 
-            URL url = new URL(weatherUrl);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
+                JSONObject json = new JSONObject(response.toString());
+                String ip = json.getString("ip");
+                String city = json.getString("city");
+                String region = json.getString("region");
+                String loc = json.getString("loc");
+                String[] coords = loc.split(",");
+                String lat = coords[0];
+                String lon = coords[1];
 
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(connection.getInputStream()));
-            StringBuilder response = new StringBuilder();
-            String line;
+                // Получаем погоду
+                URL weatherUrl = new URL("https://api.open-meteo.com/v1/forecast?latitude=" + lat + "&longitude=" + lon + "&current_weather=true");
+                HttpURLConnection weatherConnection = (HttpURLConnection) weatherUrl.openConnection();
+                weatherConnection.setRequestMethod("GET");
+                BufferedReader weatherReader = new BufferedReader(
+                        new InputStreamReader(weatherConnection.getInputStream()));
+                StringBuilder weatherResponse = new StringBuilder();
+                while ((line = weatherReader.readLine()) != null)
+                    weatherResponse.append(line);
+                weatherReader.close();
 
-            while ((line = reader.readLine()) != null) {
-                response.append(line);
+                JSONObject weatherJson = new JSONObject(weatherResponse.toString());
+                JSONObject currentWeather = weatherJson.getJSONObject("current_weather");
+                String temperature = currentWeather.getString("temperature");
+                String windspeed = currentWeather.getString("windspeed");
+
+                return new String[]{ip, city, region, lat, lon, temperature, windspeed};
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
             }
-            reader.close();
-            connection.disconnect();
+        }
 
-            JSONObject json = new JSONObject(response.toString());
-            JSONObject currentWeather = json.getJSONObject("current_weather");
-            double temperature = currentWeather.getDouble("temperature");
-            double windspeed = currentWeather.getDouble("windspeed");
-
-            runOnUiThread(() -> tvWeather.setText("Температура: " + temperature + "°C\n"
-                    + "Скорость ветра: " + windspeed + " км/ч"));
-        } catch (Exception e) {
-            e.printStackTrace();
+        @Override
+        protected void onPostExecute(String[] result) {
+            if (result != null) {
+                tvIp.setText("IP: " + result[0]);
+                tvCity.setText("Город: " + result[1]);
+                tvRegion.setText("Регион: " + result[2]);
+                tvLatitude.setText("Широта: " + result[3]);
+                tvLongitude.setText("Долгота: " + result[4]);
+                tvWeather.setText("Температура: " + result[5] + "°C\nСкорость ветра: " + result[6] + " км/ч");
+            } else {
+                Toast.makeText(MainActivity.this, "Ошибка при загрузке данных", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
