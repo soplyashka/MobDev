@@ -50,7 +50,10 @@
             android:id="@+id/nav_file"
             android:title="Работа с файлами"
             android:icon="@drawable/ic_file" />
-
+        <item
+            android:id="@+id/nav_network"
+            android:icon="@drawable/ic_web"
+            android:title="Сеть" />
 
 
 

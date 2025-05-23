@@ -62,5 +62,10 @@
         android:id="@+id/nav_file"
         android:name="com.mirea.safrygina.mireaproject.FilesFragment"
         android:label="Работа с файлами" />
+    <fragment
+        android:id="@+id/nav_network"
+        android:name="com.mirea.safrygina.mireaproject.NetworkFragment"
+        android:label="Сеть"
+        tools:layout="@layout/fragment_network" />
 
 </navigation>
